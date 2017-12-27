@@ -5,6 +5,9 @@
 	if (!isset($_GET["id"])) {
 		header('Location: index.php');
 	}
+	$id = $_GET["id"];
+	$sql = "update products set luotxem = luotxem +1 where ProID = $id";
+	load($sql);
 ?>
 
 <!DOCTYPE html>
