@@ -9,6 +9,11 @@
 </head>
 <body>
 	<div class="container">
+		<?php if ($show == 1) : ?>
+				<div class="alert alert-success" role="alert" style="width: 800px;margin-top: 23px;margin-left: 20%;margin-bottom: -15px">
+					<strong>Xin lỗi!</strong> Bạn đã nhập sai tên đăng nhập hoạc mật khẩu.
+				</div>
+			<?php endif; ?>
 		<div class="account">
 			<h2 class="account-in" style="width: 1130px">Đăng nhập</h2>
 				<form method="post" action="" class="text-center">
