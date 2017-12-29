@@ -1,5 +1,7 @@
 <?php
 	require_once "./lib/db.php";
+
+	
 ?>
 
 <!DOCTYPE html>
@@ -14,86 +16,46 @@
 	<div class="container">
 			<div class="content">
 				<!-- menuleft -->
-					<?php include 'LayoutGeneral/menu.php'; ?>
-
+					
 
 				<!-- menuright -->
-					<div class="col-md-9 top-single">
-						<div class="content-bottom" style="margin-top: 5px">
-						<h3 class="future" style="width: 925px">MỚI NHẤT</h3>
+					<div class="col-md-12 top-single">
+						<div class="content-bottom" style="margin-top: 58px">
+						<h3 class="future" style="width: 1115px">MỚI NHẤT</h3>
 						<div class="content-bottom-in">
 							<ul id="flexiselDemo0">			
+								<?php
+								
+								$sl=1;	
+								$sql = "select * from products ORDER BY ngaynhaphang DESC LIMIT 0,10";
+								$rs = load($sql);
+								while($row= $rs->fetch_assoc()){
+							?>		
 								<li>
 									<div class="col-md men">
-										<a href="" class="compare-in"><img src="images/banner4.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px; padding: 17px">Đặt mua</span>
-										</div>
-										</a>
+										<form method="post" action="addItemToCart.inc.php" >
+										<!-- <input type="hidden" name="txtProID" value="<?= $row["ProID"] ?>">
+										<input type="hidden" value="<?= $sl ?>" name="txtQuantity" id="txtQuantity"> -->
+										<button type="submit" name="btnAddItemToCart" class="compare-in " style="border:none;"><img src="imgs/<?= $row["ProID"] ?>/main.jpg" alt="..." height="180px">	
+											<div class="compare" style="width: 287px;height: 178px;margin-left: -10px">
+												<span style="width: 100px;padding: 17px">Đặt mua</span>
+											</div>
+										</button>
+								</form>
 										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
+											<h5 style="text-align: center;color: blue;font-weight: bold;"><?= $row["ProName"] ?></h5>
+											<h5 style="height: 60px;margin-top: -10px; margin-bottom: 10px;text-align: center;"><?= $row["TinyDes"] ?></h5>
 											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
+												<a href="details.php?id=<?= $row["ProID"] ?>" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Xem chi tiết</a>
+												<p class="dollar"><span class="in-dollar" style="font-size: 10px;color: blue;"></span><span><?= number_format($row["Price"]) ?> VND</span></span></p>
 												<div class="clearfix"></div>
 											</div>
 										</div>
 									</div>						
 								</li>
-								<li>
-									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/banner4.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
-										</div>
-										</a>
-										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
-											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
-												<div class="clearfix"></div>
-											</div>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/pic10.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
-										</div>
-										</a>
-										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
-											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
-												<div class="clearfix"></div>
-											</div>
-										</div>
-									</div>							
-								</li>
-								<li>
-									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/pic10.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
-										</div>
-										</a>
-										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
-											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
-												<div class="clearfix"></div>
-											</div>
-										</div>
-									</div>					
-								</li>
+								<?php
+									} 
+								 ?>
 					
 							</ul>
 					<script type="text/javascript">
@@ -126,82 +88,36 @@
 	<script type="text/javascript" src="js/jquery.flexisel.js"></script>
 						</div>
 					</div>
-						<div class="content-bottom" style="margin-top: 5px">
-						<h3 class="future" style="width: 925px">BÁN CHẠY</h3>
+						<div class="content-bottom" style="margin-top: 58px">
+						<h3 class="future" style="width: 1115px">BÁN CHẠY</h3>
 						<div class="content-bottom-in">
 							<ul id="flexiselDemo1">			
+								<?php
+								$sql = "select * from products ORDER BY soluongban DESC LIMIT 0,10";
+								$rs = load($sql);
+								while($row= $rs->fetch_assoc()){
+							?>		
 								<li>
 									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/pic10.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
+										<a href="" class="compare-in"><img src="imgs/<?= $row["ProID"] ?>/main.jpg" alt="" height="200px"/>	
+										<div class="compare" style="width: 288px;height: 195px;margin-left: -2.5px">
+											<span style="width: 100px; padding: 17px">Đặt mua</span>
 										</div>
 										</a>
 										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
+											<h5 style="text-align: center;color: blue;font-weight: bold;"><?= $row["ProName"] ?></h5>
+											<h5 style="height: 60px;margin-top: -10px; margin-bottom: 10px;text-align: center;"><?= $row["TinyDes"] ?></h5>
 											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
+												<a href="details.php?id=<?= $row["ProID"] ?>" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Xem chi tiết</a>
+												<p class="dollar"><span class="in-dollar" style="font-size: 10px;color: blue;"></span><span><?= number_format($row["Price"]) ?> VND</span></span></p>
 												<div class="clearfix"></div>
 											</div>
 										</div>
 									</div>						
 								</li>
-								<li>
-									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/pic10.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
-										</div>
-										</a>
-										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
-											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
-												<div class="clearfix"></div>
-											</div>
-										</div>
-									</div>	
-								</li>
-								<li>
-									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/pic10.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
-										</div>
-										</a>
-										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
-											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
-												<div class="clearfix"></div>
-											</div>
-										</div>
-									</div>							
-								</li>
-								<li>
-									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/pic10.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
-										</div>
-										</a>
-										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
-											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
-												<div class="clearfix"></div>
-											</div>
-										</div>
-									</div>				
-								</li>
+								<?php
+									} 
+								 ?>
 					
 							</ul>
 					<script type="text/javascript">
@@ -234,82 +150,36 @@
 	<script type="text/javascript" src="js/jquery.flexisel.js"></script>
 						</div>
 					</div>
-						<div class="content-bottom" style="margin-top: 5px">
-						<h3 class="future" style="width: 925px">XEM NHIỀU</h3>
+						<div class="content-bottom" style="margin-top: 58px; margin-bottom: 80px">
+						<h3 class="future" style="width: 1115px">XEM NHIỀU</h3>
 						<div class="content-bottom-in">
-							<ul id="flexiselDemo2">			
+							<ul id="flexiselDemo2">	
+							<?php
+								$sql = "select * from products ORDER BY luotxem DESC LIMIT 0,10";
+								$rs = load($sql);
+								while($row= $rs->fetch_assoc()){
+							?>		
 								<li>
 									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/pic10.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
+										<a href="" class="compare-in"><img src="imgs/<?= $row["ProID"] ?>/main.jpg" alt="" height="200px"/>	
+										<div class="compare" style="width: 288px;height: 195px;margin-left: -2.5px">
+											<span style="width: 100px; padding: 17px">Đặt mua</span>
 										</div>
 										</a>
 										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
+											<h5 style="text-align: center;color: blue;font-weight: bold;"><?= $row["ProName"] ?></h5>
+											<h5 style="height: 60px;margin-top: -10px; margin-bottom: 10px;text-align: center;"><?= $row["TinyDes"] ?></h5>
 											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
+												<a href="details.php?id=<?= $row["ProID"] ?>" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Xem chi tiết</a>
+												<p class="dollar"><span class="in-dollar" style="font-size: 10px;color: blue;"></span><span><?= number_format($row["Price"]) ?> VND</span></span></p>
 												<div class="clearfix"></div>
 											</div>
 										</div>
 									</div>						
 								</li>
-								<li>
-									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/pic10.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
-										</div>
-										</a>
-										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
-											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
-												<div class="clearfix"></div>
-											</div>
-										</div>
-									</div>	
-								</li>
-								<li>
-									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/pic10.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
-										</div>
-										</a>
-										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
-											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
-												<div class="clearfix"></div>
-											</div>
-										</div>
-									</div>							
-								</li>
-								<li>
-									<div class="col-md men">
-										<a href="" class="compare-in"><img  src="images/pic10.jpg" alt="" height="200px"/>	
-										<div class="compare" style="width: 198px;height: 190px">
-											<span style="width: 100px">Giỏ hàng</span>
-											<span style="width: 100px">Đăt mua</span>
-										</div>
-										</a>
-										<div class="top-content">
-											<h5>Mascot Kitty - White</h5>
-											<div class="white">
-												<a href="chitiet.php" class="hvr-shutter-in-vertical hvr-shutter-in-vertical2">Chi tiết</a>
-												<p class="dollar"><span class="in-dollar" style="font-size: 10px"></span><span>16.000.000</span></span></p>
-												<div class="clearfix"></div>
-											</div>
-										</div>
-									</div>					
-								</li>
+								<?php
+									} 
+								 ?>
 					
 							</ul>
 					<script type="text/javascript">
