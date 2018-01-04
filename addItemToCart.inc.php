@@ -1,12 +1,18 @@
 <?php
 require_once './cart.inc';
-
 // session_start();
 // if (!isset($_SESSION["cart"])) {
 // 	$_SESSION["cart"] = array();
 // }
 
 if (isset($_POST["btnAddItemToCart"])) {
+	if ($_SESSION["dang_nhap_chua"] == 0) {
+
+		header('location: dangnhap.php');
+		echo "bạn cần đăng nhập trước khi mua hàng";
+
+	}else{
+
 	$proId = $_POST["txtProID"];
 	$q = $_POST["txtQuantity"];
 	
@@ -24,3 +30,5 @@ if (isset($_POST["btnAddItemToCart"])) {
 	    header("location: $url");
 	}
 }
+}
+ 
